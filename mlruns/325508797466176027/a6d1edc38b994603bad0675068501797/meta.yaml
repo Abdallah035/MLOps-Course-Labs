@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/325508797466176027/a6d1edc38b994603bad0675068501797/artifacts
+end_time: 1770473582146
+entry_point_name: ''
+experiment_id: '325508797466176027'
+lifecycle_stage: active
+run_id: a6d1edc38b994603bad0675068501797
+run_name: clumsy-loon-313
+run_uuid: a6d1edc38b994603bad0675068501797
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1770473561689
+status: 3
+tags: []
+user_id: bedob
