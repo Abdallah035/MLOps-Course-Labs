@@ -1,5 +1,7 @@
 """
-Churn Prediction API
+Bank Customer Churn Prediction API
+MLOps Course - Lab 1
+Author: Abdallah Mohamed
 
 Run with:
     litestar --app main:app run --reload
@@ -51,13 +53,17 @@ class ChurnRequest(BaseModel):
 @get("/")
 async def home() -> dict:
     logger.info("Home endpoint accessed")
-    return {"message": "Welcome to the Churn Prediction API"}
+    return {
+        "message": "Bank Customer Churn Prediction API",
+        "docs": "/schema/swagger",
+        "endpoints": ["/", "/health", "/predict"],
+    }
 
 
 @get("/health")
 async def health() -> dict:
     logger.info("Health check requested")
-    return {"status": "healthy"}
+    return {"status": "healthy", "service": "churn-api"}
 
 
 @post("/predict")

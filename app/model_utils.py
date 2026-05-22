@@ -1,7 +1,10 @@
 """
-Model loading and prediction logic.
+Model loading and prediction logic for the churn API.
+Author: Abdallah Mohamed
 
-The model must be loaded ONCE at module level, NOT inside the predict function.
+The model is loaded ONCE at import time (module level), NOT inside the
+predict function — loading on every request would be slow and wasteful.
+The champion model is a GradientBoostingClassifier selected via MLflow.
 """
 
 import joblib

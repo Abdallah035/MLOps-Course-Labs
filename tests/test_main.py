@@ -1,5 +1,6 @@
 """
-Tests for the Churn Prediction API.
+Tests for the Bank Customer Churn Prediction API.
+Author: Abdallah Mohamed
 
 Run with:
     pytest tests/ -v
@@ -54,14 +55,16 @@ def test_home():
     with TestClient(app=app) as client:
         r = client.get("/")
         assert r.status_code == 200
-        assert "message" in r.json()
+        body = r.json()
+        assert "message" in body
+        assert body["endpoints"] == ["/", "/health", "/predict"]
 
 
 def test_health():
     with TestClient(app=app) as client:
         r = client.get("/health")
         assert r.status_code == 200
-        assert r.json() == {"status": "healthy"}
+        assert r.json()["status"] == "healthy"
 
 
 def test_predict_endpoint():
@@ -77,4 +80,20 @@ def test_predict_invalid_input_returns_400():
     with TestClient(app=app) as client:
         bad = {**SAMPLE, "CreditScore": "not-a-number"}
         r = client.post("/predict", json=bad)
+        assert r.status_code == 400
+
+
+def test_predict_out_of_range_credit_score_returns_400():
+    # CreditScore above the allowed max (900) must be rejected by validation
+    with TestClient(app=app) as client:
+        bad = {**SAMPLE, "CreditScore": 2000}
+        r = client.post("/predict", json=bad)
+        assert r.status_code == 400
+
+
+def test_predict_missing_field_returns_400():
+    # dropping a required field must trigger a 400
+    with TestClient(app=app) as client:
+        incomplete = {k: v for k, v in SAMPLE.items() if k != "Age"}
+        r = client.post("/predict", json=incomplete)
         assert r.status_code == 400
