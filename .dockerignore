@@ -1,0 +1,21 @@
+# Keep the image small and the build context clean
+.venv/
+__pycache__/
+*.py[cod]
+.git/
+.github/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+tests/
+mlruns/
+mlartifacts/
+mlflow.db
+*.png
+.env
+.claude/
+CLAUDE.md
+README.md
+CHECKLIST.md
+.pre-commit-config.yaml

@@ -149,6 +149,10 @@ activemq-data/
 # SageMath parsed files
 *.sage.py
 
+# SSH keys / secrets — NEVER commit these
+*.pem
+*.key
+
 # Environments
 .env
 .envrc
